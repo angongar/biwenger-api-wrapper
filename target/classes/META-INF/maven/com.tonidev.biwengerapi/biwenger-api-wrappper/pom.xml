@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.tonidev.biwengerapi</groupId>
+	<artifactId>biwenger-api-wrappper</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>biwenger-api-wrapper</name>
+	<description>Wrapper para conectar con la api de Biwenger.</description>
+	<dependencies>
+		<!-- WebClient (Spring WebFlux) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+		<!-- Jackson para deserialización JSON -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.15.0</version>
+		</dependency>
+		<!-- Lombok para evitar código repetitivo -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.24</version> <!-- Verifica la última versión -->
+			<scope>provided</scope> <!-- Indica que es solo para la compilación y
+			no en tiempo de ejecución -->
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.7.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.7.0</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>17</source>  <!-- Si usas Java 17 -->
+					<target>17</target>  <!-- Si usas Java 17 -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
