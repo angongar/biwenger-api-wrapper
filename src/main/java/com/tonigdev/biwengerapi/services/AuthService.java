@@ -12,37 +12,30 @@ import com.tonigdev.biwengerapi.utils.JsonUtils;
 
 public class AuthService {
 
-	private final HttpClient httpClient;
-	private Optional<String> accessToken;
 
-	public AuthService() {
-		this.httpClient = HttpClient.newHttpClient();
-		this.accessToken = Optional.empty();
-	}
-
-	public boolean authenticate(String username, String password, String url) {
-		boolean res = false;
+	public String authenticate(HttpClient httpClient, String username, String password, String url) {
+		String res = null;
 		CredentialsDto credentials = new CredentialsDto(username, password);
 		String requestBody = JsonUtils.convertToJson(credentials);
 
 		if (requestBody != null) {
 			HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url))
-					.header("Content-Type", "application/json").POST(HttpRequest.BodyPublishers.ofString(requestBody))
+					.header("Content-Type", "application/json")
+					.header("Accept", "application/json")
+					.POST(HttpRequest.BodyPublishers.ofString(requestBody))
 					.build();
 			
 			try {
 				HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 				
 				if(response.statusCode() == 200) {
-					this.accessToken = Optional.of(extractToken(requestBody));
-					res = true;
+					res = extractToken(response.body());
 				}else{
 					System.err.println("Error en autenticación: " + response.body());
 				}
 				
 			} catch (IOException | InterruptedException e) {
 				System.out.println("Se ha producido un error: " + e.getMessage());
-				return false;
 			}
 		}
 		
@@ -50,19 +43,8 @@ public class AuthService {
 
 	}
 	
-    public String getAccessToken() {
-        return accessToken.orElseThrow(() -> new IllegalStateException("No está autenticado."));
-    }
-	
 	private String extractToken(String responseBody) {
         return responseBody.replaceAll(".*\"token\":\"([^\"]+)\".*", "$1");
     }
 
-	public void logout() {
-		this.accessToken = Optional.empty();
-	}
-	
-	public boolean isAuthenticated() {
-        return accessToken.isPresent();
-    }
 }
