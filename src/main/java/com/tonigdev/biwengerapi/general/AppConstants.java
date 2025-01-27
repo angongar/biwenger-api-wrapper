@@ -9,7 +9,7 @@ public class AppConstants {
 	public static final String urlLeague = "https://biwenger.as.com/api/v2/league";
 	public static final String urlMessagePublish = "https://biwenger.as.com/api/v2/league/%s/board";
 	public static final String urlMessageFixed = "https://biwenger.as.com/api/v2/league/%s/board/%s";
-	public static final String urlRound = "url=https://biwenger.as.com/api/v2/rounds/league";
+	public static final String urlRound = "https://biwenger.as.com/api/v2/rounds/league";
 	public static final String urlRoundInfo= "https://biwenger.as.com/api/v2/rounds/league/%s";
 
 

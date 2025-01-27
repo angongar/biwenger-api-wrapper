@@ -2,12 +2,15 @@ package com.tonigdev.biwengerapi.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 /**
  * Informacion sobre la alineacion usada por el usuario en cada jornada/ronda.
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class LineUpDto {
 
 	// Tipo de alineacion

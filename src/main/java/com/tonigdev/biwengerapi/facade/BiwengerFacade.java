@@ -5,6 +5,7 @@ import java.net.http.HttpClient;
 import com.tonigdev.biwengerapi.general.AppConstants;
 import com.tonigdev.biwengerapi.model.AccountDto;
 import com.tonigdev.biwengerapi.model.LeagueDto;
+import com.tonigdev.biwengerapi.model.RoundDto;
 import com.tonigdev.biwengerapi.model.request.LeagueRequest;
 import com.tonigdev.biwengerapi.services.AccountService;
 import com.tonigdev.biwengerapi.services.AuthService;
@@ -52,6 +53,10 @@ public class BiwengerFacade {
 	
 	public LeagueDto getLeagueInfo(String authorization, LeagueRequest request) {
 		return leagueService.getLeagueInfo(httpClient, authorization, request);
+	}
+
+	public RoundDto getRound(String authorization, LeagueRequest request) {
+		return leagueService.getRound(httpClient, authorization, request);
 	}
 	
 

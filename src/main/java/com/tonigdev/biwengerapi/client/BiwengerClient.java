@@ -4,6 +4,7 @@ import com.tonigdev.biwengerapi.facade.BiwengerFacade;
 import com.tonigdev.biwengerapi.mapper.LeagueMapper;
 import com.tonigdev.biwengerapi.model.AccountDto;
 import com.tonigdev.biwengerapi.model.LeagueDto;
+import com.tonigdev.biwengerapi.model.RoundDto;
 import com.tonigdev.biwengerapi.utils.HeadersUtils;
 
 public class BiwengerClient {
@@ -56,6 +57,20 @@ public class BiwengerClient {
     	}
     	
     	return league;
+    
+    }
+    
+    public RoundDto getRound(String idleague, String iduser) {
+    	RoundDto round = null;
+    	String authorization = HeadersUtils.convertToBearerToken(this.accessToken);
+    	try {
+    		round = facade.getRound(authorization, LeagueMapper.convertToRequest(idleague, iduser));
+    		
+    	}catch(Exception e) {
+    		// Lanzariamos aqui la excepcion correspondiente del cliente
+    	}
+    	
+    	return round;
     
     }
     
