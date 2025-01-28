@@ -36,6 +36,8 @@ public class LeagueDto {
 	private String cover;
 	// Informacion del usuario de la liga
 	private UserDto user;
+	// Informacion de los usuarios de la liga
+	private List<UserDto> users;
 	// Configuracion de la liga
 	private LeagueSettingsDto settings;
 	// Mejoras disponibles para la liga

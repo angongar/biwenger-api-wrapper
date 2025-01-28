@@ -2,6 +2,7 @@ package com.tonigdev.biwengerapi.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tonigdev.biwengerapi.model.user.StatusUserDto;
 
 import lombok.Data;
@@ -10,6 +11,7 @@ import lombok.Data;
  * Informacion del usuario asociado a una liga.
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
 
 	// Identificador del usuario
