@@ -50,7 +50,7 @@ public class BiwengerClient {
     	LeagueDto league = null;
     	String authorization = HeadersUtils.convertToBearerToken(this.accessToken);
     	try {
-    		league = facade.getLeagueInfo(authorization, LeagueMapper.convertToRequest(idleague, iduser));
+    		league = facade.getLeagueInfo(authorization, LeagueMapper.convertToRequest(idleague, iduser, Integer.MIN_VALUE));
     		
     	}catch(Exception e) {
     		// Lanzariamos aqui la excepcion correspondiente del cliente
@@ -60,11 +60,25 @@ public class BiwengerClient {
     
     }
     
-    public RoundDto getRound(String idleague, String iduser) {
+    public RoundDto getRound(String idleague, String iduser, int idRound) {
     	RoundDto round = null;
     	String authorization = HeadersUtils.convertToBearerToken(this.accessToken);
     	try {
-    		round = facade.getRound(authorization, LeagueMapper.convertToRequest(idleague, iduser));
+    		round = facade.getRound(authorization, LeagueMapper.convertToRequest(idleague, iduser, idRound));
+    		
+    	}catch(Exception e) {
+    		// Lanzariamos aqui la excepcion correspondiente del cliente
+    	}
+    	
+    	return round;
+    
+    }
+    
+    public RoundDto getLastRound(String idleague, String iduser) {
+    	RoundDto round = null;
+    	String authorization = HeadersUtils.convertToBearerToken(this.accessToken);
+    	try {
+    		round = facade.getRound(authorization, LeagueMapper.convertToRequest(idleague, iduser, Integer.MIN_VALUE));
     		
     	}catch(Exception e) {
     		// Lanzariamos aqui la excepcion correspondiente del cliente

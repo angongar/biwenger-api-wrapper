@@ -7,5 +7,6 @@ public class LeagueRequest {
 	
 	private String idleague;
 	private String iduser;
+	private int round;
 
 }

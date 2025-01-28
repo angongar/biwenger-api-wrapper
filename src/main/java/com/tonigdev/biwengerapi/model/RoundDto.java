@@ -1,5 +1,6 @@
 package com.tonigdev.biwengerapi.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**

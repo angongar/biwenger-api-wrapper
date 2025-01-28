@@ -30,13 +30,19 @@ public class LeagueMapper {
 		
 	}
 
-	public static LeagueRequest convertToRequest(String idleague, String iduser) {
-		LeagueRequest res = null;
+	public static LeagueRequest convertToRequest(String idleague, String iduser, int idRound) {
+		LeagueRequest res = new LeagueRequest();
 		
-		if(idleague != null && iduser != null) {
-			res = new LeagueRequest();
+		if(idleague != null) {
 			res.setIdleague(idleague);
+		}
+		
+		if(iduser != null) {
 			res.setIduser(iduser);
+		}
+		
+		if(idRound != Integer.MIN_VALUE) {
+			res.setRound(idRound);
 		}
 		
 		return res;

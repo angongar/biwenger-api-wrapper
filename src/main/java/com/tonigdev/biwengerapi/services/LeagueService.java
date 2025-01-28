@@ -17,56 +17,80 @@ import com.tonigdev.biwengerapi.model.responses.RoundResponse;
 import com.tonigdev.biwengerapi.utils.JsonUtils;
 
 public class LeagueService {
-	
-	public LeagueDto getLeagueInfo(HttpClient httpClient, String authorization ,LeagueRequest leagueRequest) {
-		
+
+	public LeagueDto getLeagueInfo(HttpClient httpClient, String authorization, LeagueRequest leagueRequest) {
+
 		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(AppConstants.urlLeague))
-				.header("Content-Type", "application/json")
-				.header("Authorization", authorization)
-				.header("X-League", leagueRequest.getIdleague())
-				.header("X-User", leagueRequest.getIduser())
-				.GET().build();
-		
+				.header("Content-Type", "application/json").header("Authorization", authorization)
+				.header("X-League", leagueRequest.getIdleague()).header("X-User", leagueRequest.getIduser()).GET()
+				.build();
+
 		try {
 			HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-		
-			if(response.statusCode() == 200) {
-				ApiResponse<LeagueResponse> apiResponse = JsonUtils.convertResponseToObject(response.body(), JsonUtils.getParametricType(ApiResponse.class, LeagueResponse.class));
+
+			if (response.statusCode() == 200) {
+				ApiResponse<LeagueResponse> apiResponse = JsonUtils.convertResponseToObject(response.body(),
+						JsonUtils.getParametricType(ApiResponse.class, LeagueResponse.class));
 				System.out.println(response.body());
 				return LeagueMapper.convertResponseToDto(apiResponse.getData());
 			}
-			
+
 		} catch (IOException | InterruptedException e) {
 			System.out.println("Se ha producido un error: " + e.getMessage());
 		}
-		
+
 		return null;
 	}
-	
+
 	public RoundDto getRound(HttpClient httpClient, String authorization, LeagueRequest leagueRequest) {
-		
-		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(AppConstants.urlRound))
-				.header("Content-Type", "application/json")
-				.header("Authorization", authorization)
-				.header("X-League", leagueRequest.getIdleague())
-				.header("X-User", leagueRequest.getIduser())
-				.GET().build();
-		
+		String url = String.format(AppConstants.urlRound, String.valueOf(leagueRequest.getRound()));
+
+		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url))
+				.header("Content-Type", "application/json").header("Authorization", authorization)
+				.header("X-League", leagueRequest.getIdleague()).header("X-User", leagueRequest.getIduser()).GET()
+				.build();
+
 		try {
 			HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-		
-			if(response.statusCode() == 200) {
-				ApiResponse<RoundResponse> apiResponse = JsonUtils.convertResponseToObject(response.body(), JsonUtils.getParametricType(ApiResponse.class, RoundResponse.class));
+
+			if (response.statusCode() == 200) {
+				ApiResponse<RoundResponse> apiResponse = JsonUtils.convertResponseToObject(response.body(),
+						JsonUtils.getParametricType(ApiResponse.class, RoundResponse.class));
 				System.out.println(response.body());
 				return apiResponse.getData().getRound();
 			}
-			
+
 		} catch (IOException | InterruptedException e) {
 			System.out.println("Se ha producido un error: " + e.getMessage());
 		}
-		
+
 		return null;
-		
+
+	}
+
+	public RoundDto getLastRound(HttpClient httpClient, String authorization, LeagueRequest leagueRequest) {
+
+		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(AppConstants.urlLastRound))
+				.header("Content-Type", "application/json").header("Authorization", authorization)
+				.header("X-League", leagueRequest.getIdleague()).header("X-User", leagueRequest.getIduser()).GET()
+				.build();
+
+		try {
+			HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+			if (response.statusCode() == 200) {
+				ApiResponse<RoundResponse> apiResponse = JsonUtils.convertResponseToObject(response.body(),
+						JsonUtils.getParametricType(ApiResponse.class, RoundResponse.class));
+				System.out.println(response.body());
+				return apiResponse.getData().getRound();
+			}
+
+		} catch (IOException | InterruptedException e) {
+			System.out.println("Se ha producido un error: " + e.getMessage());
+		}
+
+		return null;
+
 	}
 
 }
